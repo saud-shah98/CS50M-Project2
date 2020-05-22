@@ -21,21 +21,23 @@ export const Header = ({parrentCallBack}) => {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: 'white',
-        height: 80,
+        backgroundColor: 'whitesmoke',
         borderRadius: 8,
-        marginHorizontal: 15,
         flexDirection: 'row',
-        marginVertical: 6,
+        position: 'absolute',
+        bottom: 20,
+        padding: 15,
+        
     },
     search:{
         flex: 1,
+        
     },
     icon: {
         fontSize: 35,
         alignSelf: 'center',
         marginHorizontal: 15,
-        color: 'purple',
+        color: 'green',
         
         
     }

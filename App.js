@@ -1,35 +1,37 @@
 import React,  { Component, useState  } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {Header} from './components/header/header.component'
+import {search, movie} from './mockData';
+import {MovieList} from './components/list/list.component'
+import {fetchMovies} from './api/omd'
+import {MovieApp} from './navigation/navigation'
+
 
 
 export default class App extends Component {
   constructor(){
     super();
-    this.state = {
-      movie: ''
-    }
+
+
+  }
+  getMovies = async () => {
+    const results = await fetchMovies()
+    this.setState({movies: results})
   }
 
   callback = (movie) => {
-    this.setState({movie: movie})
+    this.setState({search: movie, initiateSearch: true})
+   
   }
 
+  componentDidMount() {
+    this.getMovies()
+  }
+
+
+
   render() {
-    
-    return (
-      <View style={styles.container}>
-        <Header parrentCallBack={this.callback}/>
-       <Text style={{color:'black', fontSize: 40, }}>{this.state.movie}</Text>
-      </View>
-    );
+  return (
+    <MovieApp />
+    )    
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'whitesmoke',
-    marginTop: 20,
-    flex: 1
-  },
-});
