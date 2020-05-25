@@ -9,21 +9,15 @@ import {MovieApp} from './navigation/navigation'
 export default class App extends Component {
   constructor(){
     super();
+    this.state = {
+      movies: []
+    }
 
-
-  }
-  getMovies = async () => {
-    const results = await fetchMovies()
-    this.setState({movies: results})
   }
 
   callback = (movie) => {
     this.setState({search: movie, initiateSearch: true})
    
-  }
-
-  componentDidMount() {
-    this.getMovies()
   }
 
 

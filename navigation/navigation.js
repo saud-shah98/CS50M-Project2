@@ -11,11 +11,14 @@ import {
 }
 from 'react-navigation-tabs'
 import {HomePage} from '../screens/home-page.component'
-
+import {ResultsPage} from '../screens/results-page.component'
+import {DetailPage} from '../screens/detail-page.component';
 
 const MainStack = createStackNavigator(
     {
       Home: HomePage,
+      Results: ResultsPage,
+      Detail: DetailPage,
     },
     {
       initialRouteName: 'Home',
@@ -37,6 +40,9 @@ const MainStack = createStackNavigator(
   const MainTabs = createBottomTabNavigator(
     {
         Home: HomePage,
+        Results: ResultsPage,
+        Detail: DetailPage,
+
 
     },
     {
