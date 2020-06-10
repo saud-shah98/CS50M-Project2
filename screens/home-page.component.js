@@ -19,7 +19,7 @@ export class HomePage extends Component {
           }
         }
 
-        
+    // When user searches
     callback = (movie) => {
         console.log(movie)
         return fetch(`https://www.omdbapi.com?apikey=${apiKey}&s=${movie}`)
@@ -34,7 +34,7 @@ export class HomePage extends Component {
         });
     }
 
-    
+    // In case user has not searched yet
     NoResultsContainer(){
       return(
      <Text style={{textAlign: 'center', marginTop: 30, backgroundColor:'white'}}>Search for a movie..</Text>

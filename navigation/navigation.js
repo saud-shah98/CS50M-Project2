@@ -14,6 +14,7 @@ import {HomePage} from '../screens/home-page.component'
 import {ResultsPage} from '../screens/results-page.component'
 import DetailPage from '../screens/detail-page.component';
 
+// Stack Navigator (complete)
 const MainStack = createStackNavigator(
     {
       Home: HomePage,
