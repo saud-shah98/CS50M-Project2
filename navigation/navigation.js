@@ -12,7 +12,7 @@ import {
 from 'react-navigation-tabs'
 import {HomePage} from '../screens/home-page.component'
 import {ResultsPage} from '../screens/results-page.component'
-import {DetailPage} from '../screens/detail-page.component';
+import DetailPage from '../screens/detail-page.component';
 
 const MainStack = createStackNavigator(
     {

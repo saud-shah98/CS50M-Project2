@@ -2,40 +2,65 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import {Component} from 'react';
 import {Header} from '../components/header/header.component';
-import {getMovies} from '../api/omd';
-import {MovieList} from '../components/list/list.component'
-import { timing } from 'react-native-reanimated';
-
+import {ListItem} from '../components/item/ListItem';
 
 let apiKey = 'd7ec2628'
 
 export class HomePage extends Component {
     constructor(props){
         super(props);
+        
         this.state = {
-            movies: [],
+            movies: [
+              
+            ],
             search: '',
             initiateSearch: false,
           }
         }
+
         
     callback = (movie) => {
-        this.setState({search: movie, initiateSearch: true})
+        console.log(movie)
+        return fetch(`https://www.omdbapi.com?apikey=${apiKey}&s=${movie}`)
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          this.setState({movies:json.Search})
+        })
         
+        .catch((err) => {
+          console.log(err);
+        });
     }
-    submitForm = () => {
-      this.props.navigation.navigate('Results');
-    }
+
     
+    NoResultsContainer(){
+      return(
+     <Text style={{textAlign: 'center', marginTop: 30, backgroundColor:'white'}}>Search for a movie..</Text>
+  )}
 
  render(){
    return(
     <View style={styles.container}>  
      <Text style={styles.logoText}>Movie Browser</Text>
-    <Image style={styles.logo}source={{
-          uri: 'https://i.pinimg.com/originals/43/eb/48/43eb48a2bbdefdd1c34b87bb72c9c3c7.jpg',
-        }}/>
-     <Header submitForm={this.submitForm} parrentCallBack={this.callback}/>
+    
+        <View>
+        <FlatList style={styles.list}
+                data={this.state.movies}
+                ListEmptyComponent={this.NoResultsContainer}
+                keyExtractor={item => item.id}
+                renderItem={({item}) =>
+                <ListItem 
+                navigation={this.props.navigation} 
+                title={item.Title}
+                year={item.Year}
+                imageURL={item.Poster}
+                id={item.imdbID}
+                /> }/>
+        </View>
+
+     <Header parrentCallBack={this.callback}/>
     
   </View>
    )
@@ -49,17 +74,31 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     logo: {
-      height: 400,
-      width: 300,
+      height: 200,
+      width: 200,
       alignSelf:'center'
     },
     logoText:{
       fontSize: 40,
-      color:'white',
+      color:'darkred',
       textAlign:'center',
-      backgroundColor:'green',
+      backgroundColor:'whitesmoke',
       padding: 10,
       
+  },
+  entry: {
+    backgroundColor:'#f9c2ff',
+    padding:20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title:{
+    fontSize:32,
+  },
+  list:{
+    backgroundColor:'black',
+    height: 400,
+    marginTop: 20,
   }
   });
   
